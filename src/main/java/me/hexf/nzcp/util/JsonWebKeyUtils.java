@@ -1,6 +1,6 @@
 package me.hexf.nzcp.util;
 
-import org.apache.commons.codec.binary.Base64;
+import com.google.common.io.BaseEncoding;
 
 import java.math.BigInteger;
 import java.security.AlgorithmParameters;
@@ -22,8 +22,8 @@ public class JsonWebKeyUtils {
 
         assert keyType.equals("EC");
 
-        byte[] xBytes = Base64.decodeBase64((String) jwk.get("x"));
-        byte[] yBytes = Base64.decodeBase64((String) jwk.get("y"));
+        byte[] xBytes = BaseEncoding.base64Url().decode((String) jwk.get("x"));
+        byte[] yBytes = BaseEncoding.base64Url().decode((String) jwk.get("y"));
 
         BigInteger x = new BigInteger(xBytes);
         BigInteger y = new BigInteger(yBytes);

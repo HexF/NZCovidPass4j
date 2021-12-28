@@ -2,22 +2,16 @@ package me.hexf.nzcp.v1;
 
 import com.google.iot.cbor.*;
 import me.hexf.nzcp.CredentialSubject;
-import me.hexf.nzcp.Verifier;
 import me.hexf.nzcp.exceptions.DecodingException;
 import me.hexf.nzcp.exceptions.MalformedPayloadException;
 import me.hexf.nzcp.util.CborUtils;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.ByteBuffer;
-import java.nio.charset.StandardCharsets;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
-import java.util.Date;
 import java.util.List;
 
 public abstract class CovidPass extends me.hexf.nzcp.CovidPass {
