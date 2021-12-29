@@ -25,8 +25,8 @@ public class JsonWebKeyUtils {
         byte[] xBytes = BaseEncoding.base64Url().decode((String) jwk.get("x"));
         byte[] yBytes = BaseEncoding.base64Url().decode((String) jwk.get("y"));
 
-        BigInteger x = new BigInteger(xBytes);
-        BigInteger y = new BigInteger(yBytes);
+        BigInteger x = new BigInteger(1, xBytes);
+        BigInteger y = new BigInteger(1, yBytes);
 
         ECPoint point = new ECPoint(x, y);
 
