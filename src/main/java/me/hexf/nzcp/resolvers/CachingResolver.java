@@ -44,7 +44,11 @@ public class CachingResolver implements IResolver {
                 LocalDateTime.now().plus(timeToLive)
                 );
 
-        cache.replace(didLocator, entry);
+        if(cache.containsKey(didLocator)) {
+            cache.replace(didLocator, entry);
+        } else {
+            cache.put(didLocator, entry);
+        }
 
         return resolvedDocument;
 
