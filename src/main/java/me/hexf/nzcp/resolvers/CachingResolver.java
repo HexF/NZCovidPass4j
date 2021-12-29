@@ -33,7 +33,7 @@ public class CachingResolver implements IResolver {
     public DIDDocument resolveDidDocument(URI didLocator) throws DocumentResolvingException {
 
         CacheEntry entry = cache.get(didLocator);
-        if(entry != null && entry.expiryTime.isBefore(LocalDateTime.now())){
+        if(entry != null && entry.expiryTime.isAfter(LocalDateTime.now())){
             return entry.document;
         }
 
