@@ -106,14 +106,19 @@ public class Verifier {
 
         DIDDocument certificateDocument = resolver.resolveDidDocument(pass.getIssuer());
         List<VerificationMethod> verificationMethodList = certificateDocument.getAssertionMethodVerificationMethods();
-        Optional<VerificationMethod> verificationMethod = verificationMethodList.stream()
-                .filter(method -> method.getId().equals(keyLocator))
-                .findFirst();
+        VerificationMethod verificationMethod = null;
 
-        if(verificationMethod.isEmpty())
+        for (VerificationMethod vm: verificationMethodList) {
+            if(vm.getId().equals(keyLocator)){
+                verificationMethod = vm;
+                break;
+            }
+        }
+
+        if(verificationMethod == null)
             throw new KeyNotFoundException(keyLocator);
         try {
-            Map<String, Object> jwk = verificationMethod.get().getPublicKeyJwk();
+            Map<String, Object> jwk = verificationMethod.getPublicKeyJwk();
             publicKey = JsonWebKeyUtils.getECPublicKey(jwk);
         } catch (InvalidKeySpecException | NoSuchAlgorithmException | InvalidParameterSpecException e) {
             throw new KeyFormatException(keyLocator);
